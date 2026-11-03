@@ -2,14 +2,16 @@ import type { APIRoute } from "astro";
 
 export const prerender = true;
 
+const base = import.meta.env.BASE_URL;
+
 const robotsTxt = `
 User-agent: *
-Disallow: /_astro/
-Disallow: /archive/?tag=
-Disallow: /archive/?category=
-Disallow: /archive/?uncategorized=
+Disallow: ${base}_astro/
+Disallow: ${base}archive/?tag=
+Disallow: ${base}archive/?category=
+Disallow: ${base}archive/?uncategorized=
 
-Sitemap: ${new URL("sitemap-index.xml", import.meta.env.SITE).href}
+Sitemap: ${new URL(`${base}sitemap-index.xml`, import.meta.env.SITE).href}
 `.trim();
 
 export const GET: APIRoute = () => {
